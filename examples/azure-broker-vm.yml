@@ -1,0 +1,111 @@
+---
+name: azure-broker
+director_uuid: REPLACE-ME
+
+releases:
+- name: azure-broker
+  version: latest
+
+compilation:
+  workers: 3
+  network: default
+  reuse_compilation_vms: true
+  cloud_properties:
+    instance_type: Standard_D1
+
+update:
+  canaries: 0
+  canary_watch_time: 30000-60000
+  update_watch_time: 30000-60000
+  max_in_flight: 32
+  serial: false
+
+networks:
+- name: default
+  type: manual
+  subnets:
+  - range: 10.0.64.0/20
+    gateway: 10.0.64.1
+    reserved: [10.0.64.2 - 10.0.64.3]
+    static:
+      - 10.0.64.4
+    cloud_properties:
+      virtual_network_name: boshvnet-crp
+      subnet_name: Broker
+
+resource_pools:
+  - name: default
+    network: default
+    stemcell:
+      name: bosh-azure-hyperv-ubuntu-trusty-go_agent
+      version: latest
+    cloud_properties:
+      instance_type: Standard_D1
+      security_group: nsg-cf
+
+jobs:
+- name: azure-broker
+  templates:
+  - {name: azure-broker, release: azure-broker}
+  instances: 1
+  resource_pool: default
+  networks:
+  - name: default
+    default: [dns, gateway]
+    static_ips:
+    - 10.0.64.4
+- name: azure-broker-registrar
+  lifecycle: errand
+  templates:
+  - {name: broker-registrar, release: azure-broker}
+  instances: 1
+  resource_pool: default
+  networks:
+  - name: default
+  properties:
+    azure-broker:
+      name: REPLACE-ME
+      protocol: REPLACE-ME
+      external_host: REPLACE-ME
+- name: azure-broker-deregistrar
+  lifecycle: errand
+  templates:
+  - {name: broker-deregistrar, release: azure-broker}
+  instances: 1
+  resource_pool: default
+  networks:
+  - name: default
+  properties:
+    azure-broker:
+      name: REPLACE-ME
+
+properties:
+  azure-broker:
+    auth_username: REPLACE-ME
+    auth_password: REPLACE-ME
+    database:
+      server_name: REPLACE-ME
+      username: REPLACE-ME
+      password: REPLACE-ME
+      database_name: REPLACE-ME
+    azure:
+      environment: REPLACE-ME
+      subscription_id: REPLACE-ME
+      tenant_id: REPLACE-ME
+      client_id: REPLACE-ME
+      client_secret: REPLACE-ME
+      docDb_hostEndPoint: REPLACE-ME
+      docDb_masterKey: REPLACE-ME
+    route-registrar:
+      external_host: REPLACE-ME
+      external_ip: REPLACE-ME
+  nats:
+    machines: [REPLACE-ME]
+    password: REPLACE-ME
+    port: 4222
+    user: REPLACE-ME
+  cf:
+    api_url: REPLACE-ME
+    skip_ssl_validation: true
+    admin_username: REPLACE-ME
+    admin_password: REPLACE-ME

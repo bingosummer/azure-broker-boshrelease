@@ -1,0 +1,13 @@
+---
+applications:
+- name: meta-azure-service-broker
+  buildpack: https://github.com/cloudfoundry/nodejs-buildpack
+  instances: 1
+  env:
+    environment: <%= p('azure-broker.azure.environment') %>
+    subscription_id: <%= p('azure-broker.azure.subscription_id') %>
+    tenant_id: <%= p('azure-broker.azure.tenant_id') %>
+    client_id: <%= p('azure-broker.azure.client_id') %>
+    client_secret: <%= p('azure-broker.azure.client_secret') %>
+    docDb_hostEndPoint: <%= p('azure-broker.azure.docDb_hostEndPoint') %>
+    docDb_masterKey: <%= p('azure-broker.azure.docDb_masterKey') %>

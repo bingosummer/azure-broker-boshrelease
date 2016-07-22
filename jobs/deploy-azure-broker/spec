@@ -1,0 +1,77 @@
+---
+name: deploy-azure-broker
+
+packages:
+  - cf-cli
+  - azure-broker
+
+templates:
+  bin/errand.sh.erb: bin/run
+  config/azure-config.json.erb: config/azure-config.json
+  config/manifest.yml.erb: config/manifest.yml
+
+properties:
+  azure-broker.auth_username:
+    description: "Broker Auth Username"
+    default: "azure-broker"
+  azure-broker.auth_password:
+    description: "Broker Auth Password"
+    default: "azure-broker"
+
+  azure-broker.database.server_name:
+    description: "Broker Database Server Name"
+  azure-broker.database.username:
+    description: "Broker Database Username"
+  azure-broker.database.password:
+    description: "Broker Database Password"
+  azure-broker.database.database_name:
+    description: "Broker Database Name"
+
+  azure-broker.azure.environment:
+    description: "Azure Environment"
+  azure-broker.azure.subscription_id:
+    description: "Azure Subscription ID"
+  azure-broker.azure.tenant_id:
+    description: "Azure Tenant ID"
+  azure-broker.azure.client_id:
+    description: "Azure Client ID"
+  azure-broker.azure.client_secret:
+    description: "Azure Client Secret"
+  azure-broker.azure.docDb_hostEndPoint:
+    description: "Azure Document DB Host Endpoint"
+  azure-broker.azure.docDb_masterKey:
+    description: "Azure Document DB Master Key"
+
+  cf.api_url:
+    description: "CF API URL"
+  cf.skip_ssl_validation:
+    description: "Whether to verify SSL certs when making API requests"
+    default: false
+  cf.admin_username:
+    description: "CF admin username"
+  cf.admin_password:
+    description: "CF admin password"
+
+  azure-broker.cf.app.organization:
+    description: "Organization where the Azure Broker application will be deployed"
+    default: "system"
+  azure-broker.cf.app.space:
+    description: "Space where the Azure Broker application will be deployed"
+    default: "azure-broker"
+  azure-broker.cf.app.name:
+    description: "Azure Broker application name"
+    default: "azure-broker"
+  azure-broker.cf.app.instances:
+    description: "Azure Broker application number of instances"
+    default: 1
+  azure-broker.cf.app.memory:
+    description: "Azure Broker application memory limit"
+    default: "256M"
+  azure-broker.cf.app.disk:
+    description: "Azure Broker application disk limit"
+    default: "256M"
+  azure-broker.cf.app.hostname:
+    description: "Azure Broker application hostname"
+    default: "azure-broker"
+  azure-broker.cf.app.domain:
+    description: "Azure Broker application domain"

@@ -1,0 +1,16 @@
+---
+node/node-v4.4.7-linux-x64.tar.xz:
+  object_id: 7f54cb3e-bed1-4e1f-8b8e-eb829997b8b4
+  sha: !binary |-
+    ZTMwNGNhYjkzOGNlNTk0MmM4NGQ0ZmZhMmFkNWEwYTNhZDIwMjA4Yg==
+  size: 8314716
+golang/go1.6.3.linux-amd64.tar.gz:
+  object_id: 78837583-bdbc-4595-9ce6-a81a2f9aed15
+  sha: !binary |-
+    NWU5MTZiYTRkZDhjMmZjNDNiZWFmY2E0YzA4YjMzNGM0ZDA2ODZmMw==
+  size: 84856920
+cf-cli/cf-cli_6.20.0_linux_x86-64.tgz:
+  object_id: d47c00f0-5a39-4bcd-8dd7-0009db6d74aa
+  sha: !binary |-
+    NmFiZGY5NjIwODIzMjk5MzkwMDhiNzcxNzZiOGE1N2QzYWU0Zjg4NA==
+  size: 6461018

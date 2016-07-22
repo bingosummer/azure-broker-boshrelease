@@ -1,0 +1,6 @@
+---
+name: azure-broker-route-registrar
+dependencies:
+  - golang
+files:
+  - github.com/cloudfoundry-incubator/route-registrar/**/*

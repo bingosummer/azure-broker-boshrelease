@@ -1,0 +1,11 @@
+check process azure-broker
+  with pidfile /var/vcap/sys/run/azure-broker/azure-broker.pid
+  start program "/var/vcap/packages/bosh-helpers/monit_debugger azure-broker_ctl '/var/vcap/jobs/azure-broker/bin/azure-broker_ctl start'"
+  stop program "/var/vcap/packages/bosh-helpers/monit_debugger azure-broker_ctl '/var/vcap/jobs/azure-broker/bin/azure-broker_ctl stop'"
+  group vcap
+
+check process azure-broker-route-registrar
+  with pidfile /var/vcap/sys/run/azure-broker/route-registrar.pid
+  start program "/var/vcap/packages/bosh-helpers/monit_debugger route-registrar_ctl '/var/vcap/jobs/azure-broker/bin/route-registrar_ctl start'"
+  stop program "/var/vcap/packages/bosh-helpers/monit_debugger route-registrar_ctl '/var/vcap/jobs/azure-broker/bin/route-registrar_ctl stop'"
+  group vcap

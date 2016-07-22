@@ -1,0 +1,39 @@
+#!/bin/bash
+
+set -e -x
+
+export PATH=/var/vcap/packages/cf-cli/bin:$PATH
+
+CF_API_URL='<%= p("cf.api_url") %>'
+CF_ADMIN_USERNAME='<%= p("cf.admin_username") %>'
+CF_ADMIN_PASSWORD='<%= p("cf.admin_password") %>'
+
+BROKER_NAME='<%= p("azure-broker.name") %>'
+BROKER_URL='<%= p("azure-broker.protocol") %>://<%= p("azure-broker.external_host") %>'
+BROKER_USERNAME='<%= p("azure-broker.auth_username") %>'
+BROKER_PASSWORD='<%= p("azure-broker.auth_password") %>'
+
+function updateServiceBroker() {
+  echo "Service broker already exists - updating broker"
+  cf update-service-broker ${BROKER_NAME} ${BROKER_USERNAME} ${BROKER_PASSWORD} ${BROKER_URL}
+}
+
+function createServiceBroker(){
+  echo "Service broker does not exist - creating broker"
+  cf create-service-broker ${BROKER_NAME} ${BROKER_USERNAME} ${BROKER_PASSWORD} ${BROKER_URL}
+}
+
+echo "CF_API_URL=${CF_API_URL}"
+echo "CF_ADMIN_USERNAME=${CF_ADMIN_USERNAME}"
+echo "BROKER_NAME=${BROKER_NAME}"
+echo "BROKER_URL=${BROKER_URL}"
+echo "BROKER_USERNAME=${BROKER_USERNAME}"
+
+cf api "${CF_API_URL}" <% if p('cf.skip_ssl_validation') %>--skip-ssl-validation<% end %>
+
+cf auth ${CF_ADMIN_USERNAME} ${CF_ADMIN_PASSWORD}
+
+# Create broker or update if exists
+createServiceBroker || updateServiceBroker
+
+# TODO: Loop over plans for broker and enable if is public

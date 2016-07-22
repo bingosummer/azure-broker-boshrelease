@@ -1,0 +1,64 @@
+---
+name: azure-broker
+templates:
+  bin/job_properties.sh.erb: bin/job_properties.sh
+  bin/azure-broker_ctl.erb: bin/azure-broker_ctl
+  bin/route-registrar_ctl.erb: bin/route-registrar_ctl
+  config/registrar_settings.yml.erb: config/registrar_settings.yml
+
+packages:
+  - azure-broker
+  - azure-broker-route-registrar
+  - bosh-helpers
+  - node
+
+properties:
+  nats.user:
+    description: "Username for broker to register a route with NATS"
+  nats.password:
+    description: "Password for broker to register a route with NATS"
+  nats.port:
+    description: "Port of Cloud Foundry NATS server"
+    default: 4222
+  nats.machines:
+    description: "List of echa NATS cluster member IP"
+    default: []
+
+  azure-broker.port:
+    description: "Broker Listen Port"
+    default: 5001
+  azure-broker.auth_username:
+    description: "Broker Auth Username"
+    default: "azure-broker"
+  azure-broker.auth_password:
+    description: "Broker Auth Password"
+    default: "azure-broker"
+
+  azure-broker.database.server_name:
+    description: "Broker Database Server Name"
+  azure-broker.database.username:
+    description: "Broker Database Username"
+  azure-broker.database.password:
+    description: "Broker Database Password"
+  azure-broker.database.database_name:
+    description: "Broker Database Name"
+
+  azure-broker.azure.environment:
+    description: "Azure Environment"
+  azure-broker.azure.subscription_id:
+    description: "Azure Subscription ID"
+  azure-broker.azure.tenant_id:
+    description: "Azure Tenant ID"
+  azure-broker.azure.client_id:
+    description: "Azure Client ID"
+  azure-broker.azure.client_secret:
+    description: "Azure Client Secret"
+  azure-broker.azure.docDb_hostEndPoint:
+    description: "Azure Document DB Host Endpoint"
+  azure-broker.azure.docDb_masterKey:
+    description: "Azure Document DB Master Key"
+
+  azure-broker.route-registrar.external_host:
+    description: "Host used to register a route for the broker with the router in cf-release via NATS. By registering the broker with Cloud Foundry using this route, and using the router for load balancing, the broker can be horizontally scaled. Domain is typically the same as system domain in cf-release."
+  azure-broker.route-registrar.external_ip:
+    description: "External IP to include in routing advertisement"

@@ -1,0 +1,33 @@
+#!/bin/bash
+
+set -e -x
+
+# Setup common env vars and folders
+source /var/vcap/packages/bosh-helpers/ctl_setup.sh 'azure-broker'
+export AZURE_BROKER_PID_FILE=${AZURE_BROKER_PID_DIR}/azure-broker.pid
+
+case $1 in
+
+  start)
+    pid_guard ${AZURE_BROKER_PID_FILE} ${JOB_NAME}
+    echo $$ > ${AZURE_BROKER_PID_FILE}
+
+    # Start Azure Broker service
+    cd /var/vcap/packages/azure-broker
+    exec /var/vcap/packages/node/bin/npm start \
+      >>${AZURE_BROKER_LOG_DIR}/${OUTPUT_LABEL}.stdout.log \
+      2>>${AZURE_BROKER_LOG_DIR}/${OUTPUT_LABEL}.stderr.log
+    ;;
+
+  stop)
+    # Stop AZURE Broker service
+    kill_and_wait ${AZURE_BROKER_PID_FILE}
+    ;;
+
+  *)
+    echo "Usage: $0 {start|stop}"
+    exit 1
+    ;;
+
+esac
+exit 0

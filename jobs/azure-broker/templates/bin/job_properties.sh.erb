@@ -1,0 +1,54 @@
+#!/usr/bin/env bash
+
+#
+# AZURE Broker properties
+#
+
+# Directory to store the AZURE Broker configuration files
+export AZURE_BROKER_CONF_DIR=${JOB_DIR}/config
+
+# Directory to store the AZURE Broker log files
+export AZURE_BROKER_LOG_DIR=${LOG_DIR}
+
+# Directory to store the AZURE Broker process IDs
+export AZURE_BROKER_PID_DIR=${RUN_DIR}
+
+# Directory to store the AZURE Broker data files
+export AZURE_BROKER_STORE_DIR=${STORE_DIR}
+
+# Directory to store the AZURE Broker temp files
+export AZURE_BROKER_TMP_DIR=${TMP_DIR}
+
+export environment="<%= p('azure-broker.azure.environment') %>"
+export client_id="<%= p('azure-broker.azure.client_id') %>"
+export client_secret="<%= p('azure-broker.azure.client_secret') %>"
+export subscription_id="<%= p('azure-broker.azure.subscription_id') %>"
+export tenant_id="<%= p('azure-broker.azure.tenant_id') %>"
+export docDb_hostEndPoint="<%= p('azure-broker.azure.docDb_hostEndPoint') %>"
+export docDb_masterKey="<%= p('azure-broker.azure.docDb_masterKey') %>"
+
+export AZURE_SERVICE_BROKER_AUTH_USER="<%= p('azure-broker.auth_username') %>"
+export AZURE_SERVICE_BROKER_AUTH_PASSWORD="<%= p('azure-broker.auth_password') %>"
+export AZURE_SERVICE_BROKER_DATABASE_SERVER="<%= p('azure-broker.database.server_name') %>"
+export AZURE_SERVICE_BROKER_DATABASE_USER="<%= p('azure-broker.database.username') %>"
+export AZURE_SERVICE_BROKER_DATABASE_PASSWORD="<%= p('azure-broker.database.password') %>"
+export AZURE_SERVICE_BROKER_DATABASE_NAME="<%= p('azure-broker.database.database_name') %>"
+
+#
+# Route Registrar properties
+#
+
+# Directory to store the Route Registrar configuration files
+export ROUTE_REGISTRAR_CONF_DIR=${JOB_DIR}/config
+
+# Directory to store the Route Registrar log files
+export ROUTE_REGISTRAR_LOG_DIR=${LOG_DIR}
+
+# Directory to store the Route Registrar process IDs
+export ROUTE_REGISTRAR_PID_DIR=${RUN_DIR}
+
+# Directory to store the Route Registrar data files
+export ROUTE_REGISTRAR_STORE_DIR=${STORE_DIR}
+
+# Directory to store the Route Registrar temp files
+export ROUTE_REGISTRAR_TMP_DIR=${TMP_DIR}

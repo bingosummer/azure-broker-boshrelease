@@ -1,0 +1,10 @@
+# abort script on any command that exits with a non zero value
+set -e -x
+
+# Copy meta-azure-service-broker
+echo "Copying meta-azure-service-broker..."
+cp -a ${BOSH_COMPILE_TARGET}/meta-azure-service-broker/* ${BOSH_INSTALL_TARGET}/
+
+# Install npm packages
+cd ${BOSH_INSTALL_TARGET}/
+/var/vcap/packages/node/bin/npm install

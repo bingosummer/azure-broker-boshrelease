@@ -1,0 +1,8 @@
+---
+name: azure-broker
+
+dependencies:
+  - node
+
+files:
+  - meta-azure-service-broker/**/*

@@ -1,0 +1,29 @@
+---
+name: destroy-azure-broker
+
+packages:
+  - cf-cli
+
+templates:
+  bin/errand.sh.erb: bin/run
+
+properties:
+  cf.api_url:
+    description: "CF API URL"
+  cf.skip_ssl_validation:
+    description: "Whether to verify SSL certs when making API requests"
+    default: false
+  cf.admin_username:
+    description: "CF admin username"
+  cf.admin_password:
+    description: "CF admin password"
+
+  azure-broker.cf.app.organization:
+    description: "Organization from where the Azure Broker application will be deleted"
+    default: "system"
+  azure-broker.cf.app.space:
+    description: "Space from where the Azure Broker application will be deleted"
+    default: "azure-broker"
+  azure-broker.cf.app.name:
+    description: "Azure Broker application name"
+    default: "azure-broker"

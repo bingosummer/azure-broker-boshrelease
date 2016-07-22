@@ -1,0 +1,6 @@
+[submodule "src/meta-azure-service-broker"]
+	path = src/meta-azure-service-broker
+	url = https://github.com/Azure/meta-azure-service-broker
+[submodule "src/github.com/cloudfoundry-incubator/route-registrar"]
+	path = src/github.com/cloudfoundry-incubator/route-registrar
+	url = https://github.com/cloudfoundry-incubator/route-registrar

@@ -1,0 +1,13 @@
+{
+  "apiVersion": "2.8.0",
+  "authUser": "<%= p('azure-broker.auth_username') %>",
+  "authPassword": "<%= p('azure-broker.auth_password') %>",
+  "name": "Meta Azure Service Broker",
+  "port": 5001,
+  "database": {
+    "server": "<%= p('azure-broker.database.server_name') %>",
+    "user": "<%= p('azure-broker.database.username') %>",
+    "password": "<%= p('azure-broker.database.password') %>",
+    "database": "<%= p('azure-broker.database.database_name') %>"
+  }
+}

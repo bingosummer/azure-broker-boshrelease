@@ -1,0 +1,14 @@
+---
+message_bus_servers:
+<% p('nats.machines').each do |ip| %>
+- host: <%= ip %>:<%= p('nats.port') %>
+  user: <%= p('nats.user') %>
+  password: <%= p('nats.password') %>
+<% end %>
+host: <%= p('azure-broker.route-registrar.external_ip', '') %>
+routes:
+- name: "azure-broker"
+  port: <%= p('azure-broker.port') %>
+  uris:
+  - <%= p('azure-broker.route-registrar.external_host') %>
+  registration_interval: 10s

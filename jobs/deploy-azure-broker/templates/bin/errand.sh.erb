@@ -1,0 +1,77 @@
+#!/bin/bash
+
+set -e -x
+
+export PATH=/var/vcap/packages/cf-cli/bin:$PATH
+
+CF_COLOR=false
+
+CF_API_URL="<%= p('cf.api_url') %>"
+CF_ADMIN_USER="<%= p('cf.admin_username') %>"
+CF_ADMIN_PASSWORD="<%= p('cf.admin_password') %>"
+
+BROKER_APP_SRC=/var/vcap/packages/azure-broker
+BROKER_APP_ORG="<%= p('azure-broker.cf.app.organization') %>"
+BROKER_APP_SPACE="<%= p('azure-broker.cf.app.space') %>"
+BROKER_APP_NAME="<%= p('azure-broker.cf.app.name') %>"
+BROKER_APP_INSTANCES="<%= p('azure-broker.cf.app.instances') %>"
+BROKER_APP_MEMORY="<%= p('azure-broker.cf.app.memory') %>"
+BROKER_APP_DISK="<%= p('azure-broker.cf.app.disk') %>"
+BROKER_APP_HOSTNAME="<%= p('azure-broker.cf.app.hostname') %>"
+BROKER_APP_DOMAIN="<%= p('azure-broker.cf.app.domain') %>"
+
+function authenticate_and_target() {
+  cf api "${CF_API_URL}" <% if p('cf.skip_ssl_validation') %>--skip-ssl-validation<% end %>
+  cf auth "${CF_ADMIN_USER}" "${CF_ADMIN_PASSWORD}"
+}
+
+function create_broker_org_space() {
+  if ! (cf orgs | grep ^${BROKER_APP_ORG}); then
+    cf create-org "${BROKER_APP_ORG}"
+  fi
+  cf target -o "${BROKER_APP_ORG}"
+
+  if ! (cf spaces | grep ^${BROKER_APP_SPACE}); then
+    cf create-space "${BROKER_APP_SPACE}"
+  fi
+  cf target -s "${BROKER_APP_SPACE}"
+}
+
+function copy_broker_config() {
+  cp /var/vcap/jobs/deploy-azure-broker/config/azure-config.json ${BROKER_APP_SRC}/config/default.json
+  cp /var/vcap/jobs/deploy-azure-broker/config/manifest.yml ${BROKER_APP_SRC}/manifest.yml
+}
+
+function push_broker_app() {
+  cf push "${BROKER_APP_NAME}" -p "${BROKER_APP_SRC}" -i "${BROKER_APP_INSTANCES}" -m "${BROKER_APP_MEMORY}" -k "${BROKER_APP_DISK}" -n "${BROKER_APP_HOSTNAME}" -d "${BROKER_APP_DOMAIN}" --no-start
+}
+
+function set_broker_env() {
+  cf set-env "${BROKER_APP_NAME}" AZURE_SERVICE_BROKER_AUTH_USER "<%= p('azure-broker.auth_username') %>"
+  cf set-env "${BROKER_APP_NAME}" AZURE_SERVICE_BROKER_AUTH_PASSWORD "<%= p('azure-broker.auth_password') %>"
+  cf set-env "${BROKER_APP_NAME}" AZURE_SERVICE_BROKER_DATABASE_SERVER "<%= p('azure-broker.database.server_name') %>"
+  cf set-env "${BROKER_APP_NAME}" AZURE_SERVICE_BROKER_DATABASE_USER "<%= p('azure-broker.database.username') %>"
+  cf set-env "${BROKER_APP_NAME}" AZURE_SERVICE_BROKER_DATABASE_PASSWORD "<%= p('azure-broker.database.password') %>"
+  cf set-env "${BROKER_APP_NAME}" AZURE_SERVICE_BROKER_DATABASE_NAME "<%= p('azure-broker.database.database_name') %>"
+  cf set-env "${BROKER_APP_NAME}" environment "<%= p('azure-broker.azure.environment') %>"
+  cf set-env "${BROKER_APP_NAME}" client_id "<%= p('azure-broker.azure.client_id') %>"
+  cf set-env "${BROKER_APP_NAME}" client_secret "<%= p('azure-broker.azure.client_secret') %>"
+  cf set-env "${BROKER_APP_NAME}" subscription_id "<%= p('azure-broker.azure.subscription_id') %>"
+  cf set-env "${BROKER_APP_NAME}" tenant_id "<%= p('azure-broker.azure.tenant_id') %>"
+  cf set-env "${BROKER_APP_NAME}" docDb_hostEndPoint "<%= p('azure-broker.azure.docDb_hostEndPoint') %>"
+  cf set-env "${BROKER_APP_NAME}" docDb_masterKey "<%= p('azure-broker.azure.docDb_masterKey') %>"
+}
+
+function start_broker_app() {
+  cf start "${BROKER_APP_NAME}"
+}
+
+cf -v
+authenticate_and_target
+create_broker_org_space
+copy_broker_config
+push_broker_app
+set_broker_env
+start_broker_app
+
+exit 0

@@ -1,0 +1,16 @@
+#!/bin/bash
+
+set -e -x
+
+# We grab the latest versions that are in the directory
+CF_CLI_VERSION=`ls -r cf-cli/cf-cli* | sed 's/cf-cli\/cf-cli_\(.*\)_linux_x86-64.tgz/\1/' | head -1`
+
+# Extract Cloud Foundry CLI package
+echo "Extracting Cloud Foundry CLI ${CF_CLI_VERSION}..."
+tar xzvf ${BOSH_COMPILE_TARGET}/cf-cli/cf-cli_${CF_CLI_VERSION}_linux_x86-64.tgz
+
+# Copy Cloud Foundry CLI package
+echo "Copying Cloud Foundry CLI..."
+BIN_DIR=${BOSH_INSTALL_TARGET}/bin
+mkdir -p ${BIN_DIR}
+cp -a ${BOSH_COMPILE_TARGET}/cf ${BIN_DIR}
