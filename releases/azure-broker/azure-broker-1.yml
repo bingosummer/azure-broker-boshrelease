@@ -1,0 +1,99 @@
+---
+packages:
+- name: azure-broker
+  version: !binary |-
+    NTg2YzRhZDZiMGFlOTBhNzg0NTJhMzc5N2Y3MjhhYmVkYTA2MDg1MQ==
+  fingerprint: !binary |-
+    NTg2YzRhZDZiMGFlOTBhNzg0NTJhMzc5N2Y3MjhhYmVkYTA2MDg1MQ==
+  sha1: !binary |-
+    NGY2ZDZmMjZmZGFhZDQwMzA4YTRlYzQ3MDg0NjlhMjQ2NmI0MWU1OA==
+  dependencies:
+  - node
+- name: node
+  version: !binary |-
+    YTk2NGZhZTE0Y2QxNDIyY2NmMDlhYzRlNTNkODBiMzE2MzBhZTRlZQ==
+  fingerprint: !binary |-
+    YTk2NGZhZTE0Y2QxNDIyY2NmMDlhYzRlNTNkODBiMzE2MzBhZTRlZQ==
+  sha1: !binary |-
+    NWUwODYyMDkyZjQ5NTMxODFmOWQzN2U3OTYzYzdkY2QyMTAxNmY0Mg==
+  dependencies: []
+- name: azure-broker-route-registrar
+  version: !binary |-
+    NGQ2OTM4Y2JkOTBmOWFmYThiMjQ1OGZkYzkyYzk4MzYzYjhjZTAwOA==
+  fingerprint: !binary |-
+    NGQ2OTM4Y2JkOTBmOWFmYThiMjQ1OGZkYzkyYzk4MzYzYjhjZTAwOA==
+  sha1: !binary |-
+    Y2ZmNGQxNjI1YWY0NDUxMzg3NmQzOWJjM2Q0N2IwMDg3M2M4M2YxNg==
+  dependencies:
+  - golang
+- name: golang
+  version: !binary |-
+    ZGUyMGYyYTkyZTExYzQwN2JmMDM5ZTE2ZGM4Y2M0YjRiNGIzMDZhNA==
+  fingerprint: !binary |-
+    ZGUyMGYyYTkyZTExYzQwN2JmMDM5ZTE2ZGM4Y2M0YjRiNGIzMDZhNA==
+  sha1: !binary |-
+    MGE4YmQ5Zjg1ZTU1ZTM5YjhkODQ0ZmEyNjhlYmYyOWQ1NzdmYWI5NA==
+  dependencies: []
+- name: cf-cli
+  version: !binary |-
+    NGRhZDI2MjAzNzA0OGJmMDkxNGM3YmVlMTQzNTIxMDgyNTE0NWEzYw==
+  fingerprint: !binary |-
+    NGRhZDI2MjAzNzA0OGJmMDkxNGM3YmVlMTQzNTIxMDgyNTE0NWEzYw==
+  sha1: !binary |-
+    YWEzYzcxYTFkY2Q4NGEzYzU2ZDU4ZDdmY2E2ODYxNWRkYTA5ZmQxNw==
+  dependencies: []
+- name: bosh-helpers
+  version: !binary |-
+    OGFhNmJhM2E1NmU1NzUxNjViODczNzk0NjZkZTFhMzVmNTFiZjE0NA==
+  fingerprint: !binary |-
+    OGFhNmJhM2E1NmU1NzUxNjViODczNzk0NjZkZTFhMzVmNTFiZjE0NA==
+  sha1: !binary |-
+    YTVlYTExMDlkODY4MTlkZWFkMGM4YTg1YjM1M2FlNGMxZThkMjFhNg==
+  dependencies: []
+jobs:
+- name: azure-broker
+  version: !binary |-
+    MDMwYjI4MjAzY2RjNTc3YjAyZTBlZmI0MTcyM2E1MTAxYTVmMGM4OA==
+  fingerprint: !binary |-
+    MDMwYjI4MjAzY2RjNTc3YjAyZTBlZmI0MTcyM2E1MTAxYTVmMGM4OA==
+  sha1: !binary |-
+    MmUzZmQ0MWNmOGM5NzI4M2UxMjM1NzA2NjhlZDYyMzhhMTcyNzdhYQ==
+- name: broker-deregistrar
+  version: !binary |-
+    ODVkYjI3NWQ5YTdhZWI2MTgwZDk5YmU2NjZlZTQxZTQ4OWEwMDY5MA==
+  fingerprint: !binary |-
+    ODVkYjI3NWQ5YTdhZWI2MTgwZDk5YmU2NjZlZTQxZTQ4OWEwMDY5MA==
+  sha1: !binary |-
+    YmVlNDZjOTBiNGM2YjQ4Y2JiYjQxNzdiMDdlZDc3ZTZmZDNkZDEzZQ==
+- name: destroy-azure-broker
+  version: !binary |-
+    MGRjYWNlZTVmYzRmZGJiOWY5ZDM1NGZlZGRiODc2NWIyMzdiZWYyNA==
+  fingerprint: !binary |-
+    MGRjYWNlZTVmYzRmZGJiOWY5ZDM1NGZlZGRiODc2NWIyMzdiZWYyNA==
+  sha1: !binary |-
+    MDUxOGFkMjA1MDQ5OWRhNjhkNTMwZTUxYmY2YjlmOTBhZjIwMjEyMQ==
+- name: broker-registrar
+  version: !binary |-
+    NzIwNTMzOTU2OGQ3NDg3Zjg4NjQ0ZWZlZGJhYjA0NzA1NmRiYjA1Yw==
+  fingerprint: !binary |-
+    NzIwNTMzOTU2OGQ3NDg3Zjg4NjQ0ZWZlZGJhYjA0NzA1NmRiYjA1Yw==
+  sha1: !binary |-
+    NzIyNjMzZGUxMTY0M2I3ZjU5NjliNTNmMDY1MzRlNmE3NDYxOThhNg==
+- name: deploy-azure-broker
+  version: !binary |-
+    OWI4MDY3MzBhZDRkYWQ5Y2RiOWNlYWRmY2M5YzQ2NmNiZGM2MWNiZQ==
+  fingerprint: !binary |-
+    OWI4MDY3MzBhZDRkYWQ5Y2RiOWNlYWRmY2M5YzQ2NmNiZGM2MWNiZQ==
+  sha1: !binary |-
+    OWMzZjFlYzM4MDdmYjZmMTY0OTg2MDRjZGY2MmM3NDhkYTg1MjBlZg==
+license:
+  version: !binary |-
+    ZTZjNGNjYzY1Yzc2ZTc1ZTIzMzhkMWVkYWJkY2YyNjRkMzdlZTY2Mw==
+  fingerprint: !binary |-
+    ZTZjNGNjYzY1Yzc2ZTc1ZTIzMzhkMWVkYWJkY2YyNjRkMzdlZTY2Mw==
+  sha1: !binary |-
+    NWYwOGY2ZTA0MWM2MjVkMDk5NDU0YmQxMzg1OGNhNGEzZDNhNzkxOQ==
+commit_hash: db59af1f
+uncommitted_changes: true
+name: azure-broker
+version: '1'
